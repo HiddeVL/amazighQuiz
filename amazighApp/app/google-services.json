@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "197837754328",
+    "project_id": "quizapp-52aed",
+    "storage_bucket": "quizapp-52aed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197837754328:android:ae67e6cdf255fdac6c6cad",
+        "android_client_info": {
+          "package_name": "com.hiddevanleeuwen.amazighapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197837754328-ju7r0e4acve1c7uja8nvnn9h6s0fat5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcPH2NZJAG2zskSkW2Jn3M31QLe47yt7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197837754328-ju7r0e4acve1c7uja8nvnn9h6s0fat5b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
