@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -21,7 +22,9 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
     DatabaseReference algemeen,woorden;
     private RecyclerView recyclerView;
+    Context x;
     ItemAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Reference naar woorden database
         woorden = FirebaseDatabase.getInstance("https://quizapp-52aed-default-rtdb.firebaseio.com/").getReference("woorden");
+        x =  getApplicationContext();
 
         //Klaarzetten recyclerview
         recyclerView = findViewById(R.id.recycler1);
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 .setQuery(woorden, Woord.class)
                 .build();
         // bouwen van de adapter met query
-        adapter = new ItemAdapter(options);
+        adapter = new ItemAdapter(options, x);
         // koppelen van de adapter
         recyclerView.setAdapter(adapter);
     }

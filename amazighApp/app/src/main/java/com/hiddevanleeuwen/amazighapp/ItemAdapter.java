@@ -1,5 +1,8 @@
 package com.hiddevanleeuwen.amazighapp;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.text.Layout;
 import android.util.Log;
@@ -13,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideContext;
 import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -20,6 +24,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ItemAdapter extends FirebaseRecyclerAdapter<Woord, ItemAdapter.ItemViewholder> {
     /**
@@ -28,33 +37,17 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Woord, ItemAdapter.Item
      *
      * @param options
      */
-    public ItemAdapter(@NonNull FirebaseRecyclerOptions<Woord> options) {
+    Context x;
+    public ItemAdapter(@NonNull FirebaseRecyclerOptions<Woord> options, Context context) {
         super(options);
-    }
+        x = context;
 
+    }
     @Override
     protected void onBindViewHolder(@NonNull ItemAdapter.ItemViewholder holder, int position, @NonNull Woord model) {
             holder.tvWoordned.setText(model.getWoordned());
             holder.tvWoordamz.setText(model.getWoordamz());
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference stImg = storage.getReference();
-        StorageReference imageRef = stImg.child("images/"+model.getImagepath());
-
-        imageRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-//                String profileimageurl = task.getResult().toString();
-//                Log.d("test",  profileimageurl);
-//                holder.ivWoord.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//                Glide.with(holder.ivWoord.getContext())
-//                        .load(profileimageurl)
-//                        .apply(new RequestOptions()
-//                                .placeholder(R.drawable.ic_launcher_background)
-//                                .fitCenter())
-//                        .into(holder.ivWoord);
-            }
-       });
+            Picasso.with(x).load(model.getImagepath()).into(holder.ivWoord);
     }
 
     @NonNull
@@ -72,8 +65,6 @@ public class ItemAdapter extends FirebaseRecyclerAdapter<Woord, ItemAdapter.Item
             tvWoordned = itemView.findViewById(R.id.tvWoordned2);
             tvWoordamz = itemView.findViewById(R.id.tvWoordamz2);
             ivWoord = itemView.findViewById(R.id.ivWoord2);
-
-
         }
     }
 }
