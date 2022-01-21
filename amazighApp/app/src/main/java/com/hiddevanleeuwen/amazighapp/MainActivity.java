@@ -31,22 +31,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Reference naar woorden database
         woorden = FirebaseDatabase.getInstance("https://quizapp-52aed-default-rtdb.firebaseio.com/").getReference("woorden");
-        x =  getApplicationContext();
+        x = getApplicationContext();
 
-        //Klaarzetten recyclerview
         recyclerView = findViewById(R.id.recycler1);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // bouwen van de dataquery
         FirebaseRecyclerOptions<Woord> options
                 = new FirebaseRecyclerOptions.Builder<Woord>()
                 .setQuery(woorden, Woord.class)
                 .build();
-        // bouwen van de adapter met query
+
         adapter = new ItemAdapter(options, x);
-        // koppelen van de adapter
+
         recyclerView.setAdapter(adapter);
     }
 
